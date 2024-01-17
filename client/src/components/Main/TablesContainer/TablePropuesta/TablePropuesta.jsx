@@ -1,6 +1,8 @@
 import React from "react";
-import { useState, useEffect } from 'react'
-import './TablePropuesta.css'
+
+import "./TablePropuesta.css";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PDF from "../PDF";
 
 const TablePropuesta = ({
   inputConsumoAnual,
@@ -16,6 +18,7 @@ const TablePropuesta = ({
   importeTotalAnual_prop, 
   setImporteTotalAnual_prop
   
+
 }) => {
 
   //_______________________ ESTADOS ENERGIA __________________________________
@@ -323,6 +326,41 @@ const TablePropuesta = ({
               <th className='tr_inputs'>TOTAL PAGO EN FACTURA	</th>
               <th className='tr_inputs'>TOTAL PAGO ANUAL</th>
 
+      <section>
+        <table id="second_table">
+          <thead>
+            <tr>
+              <th></th>
+              <th className="article_title" colSpan={8}>
+                Energía
+              </th>
+              <th className="article_title" colSpan={7}>
+                Potencia
+              </th>
+            </tr>
+
+            <tr>
+              <th className="tr_inputs">FRANJA</th>
+              <th className="tr_inputs">CONSUMO ANUAL (kWh)</th>
+              <th className="tr_inputs">CONSUMO FACTURA ACTUAL (kWh)</th>
+              <th className="tr_inputs">
+                PRECIOS ENERGIA ACTIVA MEDIA ANUAL (€/kWh)
+              </th>
+              <th className="tr_inputs">
+                PRECIOS ENERGIA ACTIVA MES DE FACTURACION (€/kWh)
+              </th>
+              <th className="tr_inputs">DESCUENTO(%)</th>
+              <th className="tr_inputs">PRECIO CON DESCUENTO </th>
+              <th className="tr_inputs">TOTAL PAGO EN FACTURA</th>
+              <th className="tr_inputs">TOTAL PAGO ANUAL</th>
+
+              <th className="tr_inputs">POTENCIA CONTRATADA (kW)</th>
+              <th className="tr_inputs">POTENCIA FACTURADA (kW)</th>
+              <th className="tr_inputs">PRECIOS POTENCIA (€/kW/día)</th>
+              <th className="tr_inputs">DESCUENTO (%)</th>
+              <th className="tr_inputs">PRECIO CON DESCUENTO</th>
+              <th className="tr_inputs">TOTAL PAGO EN FACTURA </th>
+              <th className="tr_inputs">TOTAL PAGO ANUAL</th>
             </tr>
           </thead>
           <tbody>
@@ -444,6 +482,29 @@ const TablePropuesta = ({
               <td className='td_radius'>{precioPotenciaDescuento_prop.p6} €</td>
               <td className='td_radius'>{totalPagoFacturaPotencia_prop.p6} €</td>
               <td className='td_radius'>{totalPagoAnualPotencia_prop.p6} €</td>
+              <td className="td_radius">p6</td>
+              <td className="td_radius">
+                {inputConsumoAnual.consumo_anual_p6}
+              </td>
+              <td className="td_radius">{inputConsumo.consumo_factura_p6}</td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"></td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"> €</td>
+
+              <td className="td_radius">
+                {inputPotenciaContratada.potencia_contratada_p6}
+              </td>
+              <td className="td_radius">
+                {inputPotenciaFacturada.potencia_facturada_p6}
+              </td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"></td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"> €</td>
+              <td className="td_radius"> €</td>
             </tr>
           </tbody>
           <tfoot>
@@ -465,9 +526,40 @@ const TablePropuesta = ({
               <td className='empty_input'></td>
               <td className='total_input'>{totalPagoFacturaPotencia_prop.p1+totalPagoFacturaPotencia_prop.p2+totalPagoFacturaPotencia_prop.p3+totalPagoFacturaPotencia_prop.p4+totalPagoFacturaPotencia_prop.p5+totalPagoFacturaPotencia_prop.p6} €</td>
               <td className='total_input'>{totalPagoAnualPotencia_prop.p1+totalPagoAnualPotencia_prop.p2+totalPagoAnualPotencia_prop.p3+totalPagoAnualPotencia_prop.p4+totalPagoAnualPotencia_prop.p5+totalPagoAnualPotencia_prop.p6} €</td>
+
+              <td className="total_title">TOTAL</td>
+              <td className="total_input">
+                {inputConsumoAnual.consumo_anual_p1 +
+                  inputConsumoAnual.consumo_anual_p2 +
+                  inputConsumoAnual.consumo_anual_p3 +
+                  inputConsumoAnual.consumo_anual_p4 +
+                  inputConsumoAnual.consumo_anual_p5 +
+                  inputConsumoAnual.consumo_anual_p6}
+              </td>
+              <td className="total_input">
+                {inputConsumo.consumo_factura_p1 +
+                  inputConsumo.consumo_factura_p2 +
+                  inputConsumo.consumo_factura_p3 +
+                  inputConsumo.consumo_factura_p4 +
+                  inputConsumo.consumo_factura_p5 +
+                  inputConsumo.consumo_factura_p6}
+              </td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="total_input"> €</td>
+              <td className="total_input"> €</td>
+
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="empty_input"></td>
+              <td className="total_input"> €</td>
+              <td className="total_input"> €</td>
             </tr>
           </tfoot>
-
         </table>
       </section>
 
@@ -494,6 +586,8 @@ const TablePropuesta = ({
           </table>
         </article>
 
+
+      <section>
         <article>
           <table>
             <tbody>
@@ -517,7 +611,6 @@ const TablePropuesta = ({
               </tr>
             </tbody>
           </table>
-
         </article>
 
         <article>
@@ -529,9 +622,10 @@ const TablePropuesta = ({
               </tr>
             </tbody>
           </table>
-
         </article>
-
+        <PDFDownloadLink document={<PDF />} fileName="Propuesta Several">
+          <button>Descargar</button>
+        </PDFDownloadLink>
       </section>
     </>
   );

@@ -41,9 +41,7 @@ const Login = () => {
     return emailRegex.test(email);
   };
 
-  // const isValidPassword = (password) => {
-  //   return password.length >= 6;
-  // };
+
 
   return (
     <section className="form_logo_container">
