@@ -1,8 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import Logo from "../Logo/Logo";
 import { UserContext } from "../../../context/userContext";
+import PDF from "../PDF";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,7 +47,16 @@ const Login = () => {
   // const isValidPassword = (password) => {
   //   return password.length >= 6;
   // };
+  const pdfContainerRef = useRef(null);
 
+  const captureScreen = async () => {
+    const pdfContainer = pdfContainerRef.current;
+
+    if (pdfContainer) {
+      const canvas = await html2canvas(pdfContainer);
+      const imgData = canvas.toDataURL("image/png");
+    } console.log("hello");
+  };
   return (
     <section className="form_logo_container">
       <Logo />
@@ -77,6 +89,10 @@ const Login = () => {
           Continuar
         </button>
       </article>
+      <button onClick={captureScreen}>Capturar pantalla</button>
+      <PDFDownloadLink document={<PDF />} fileName=".pdf">
+        <button>Descargar</button>
+      </PDFDownloadLink>
     </section>
   );
 };
